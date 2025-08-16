@@ -6,7 +6,7 @@ const http = require('http');
 const socketIo = require('socket.io');
 const cors = require('cors');
 const helmet = require('helmet');
-// const rateLimit = require('express-rate-limit');
+const rateLimit = require('express-rate-limit');
 require('dotenv').config();
 const path = require('path');
 const sequelize = require('./config/database');
