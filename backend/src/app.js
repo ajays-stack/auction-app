@@ -32,10 +32,13 @@ const io = socketIo(server, {
 });
 
 // Serve static files from the public directory
-app.use(express.static('public'));
+app.use(express.static(path.join(__dirname, '../public')));
 
-// Handle other routes by serving the index.html
-app.get('*', (req, res) => {
+// Serve frontend for non-API routes
+app.get('*', (req, res, next) => {
+  if (req.path.startsWith('/api')) {
+    return next(); // let API routes handle this
+  }
   res.sendFile(path.join(__dirname, '../public/index.html'));
 });
 
