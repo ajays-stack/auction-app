@@ -4,11 +4,11 @@ FROM node:20-alpine AS frontend-builder
 WORKDIR /app/frontend
 
 # Install frontend dependencies
-COPY frontend/package.json frontend/package-lock.json ./
+COPY frontend/package.json frontend/package-lock.json ./ 
 RUN npm install
 
 # Copy frontend code
-COPY frontend/ ./
+COPY frontend/ ./ 
 
 # Build frontend
 RUN npm run build
@@ -19,11 +19,11 @@ FROM node:20-alpine
 WORKDIR /app
 
 # Install backend dependencies
-COPY backend/package.json backend/package-lock.json ./
+COPY backend/package.json backend/package-lock.json ./ 
 RUN npm install --omit=dev
 
 # Copy backend source
-COPY backend/ ./
+COPY backend/ ./ 
 
 # Copy built frontend into backend/public
 RUN mkdir -p public
@@ -35,4 +35,4 @@ EXPOSE 5000
 ENV NODE_ENV=production
 
 # Start backend
-CMD ["node", "backend/src/app.js"]
+CMD ["node", "src/app.js"]
